@@ -1,4 +1,4 @@
-# mirdip5 pipeline
+# mirDip 5.2 Nextflow pipeline for processing miRNA and mRNA expression rawdata
 
 Runs according to `nextflow.config` configuration file, which controls things such as the source data directory, the benchmark/evaluation pairs, etc. It is crucial to update the `params` block of this configuration file in full to ensure correct results:
 
@@ -21,17 +21,17 @@ params {
 }
 ```
 
-## How to run the pipeline
+## How to run the Nextflow pipeline
 
-The following command will run the pipeline on `ijcluster`, produce an HTML report and timeline, as well as a `trace.txt` file with similar information about resource usage:
+The following command will run the pipeline on a `cluster`, produce an HTML report and timeline, as well as a `trace.txt` file with similar information about resource usage:
 
 ```bash
 nextflow run map_ids.nf -profile ijcluster -with-report -with-timeline -with-trace
 ```
 
-The ID mapping process relies on downloaded files `hgnc_complete_set.txt` as well as downloads from Ensembl to function correctly. Scripts in the `scripts/` directory will all depend on the libraries represented in the `mirbaseconverter.yml` conda environment file. Once that environment has been created and activated, you may inspect the options of each script and run each script independently simply by running it on the command line with the `-h` or `--help` options.
+The `ijcluster` profile file defines the local parameters for the nextflow run. The ID mapping process relies on downloaded files `hgnc_complete_set.txt` as well as downloads from Ensembl to function correctly. Scripts in the `scripts/` directory will all depend on the libraries represented in the `mirbaseconverter.yml` conda environment file. Once that environment has been created and activated, you may inspect the options of each script and run each script independently simply by running it on the command line with the `-h` or `--help` options.
 
-# running Noisy-OR integration script
+## running Noisy-OR integration script
 
 The following command run on the results that are placed in the `params.publishDir` directory after successful execution of the above pipeline, will produce the integrated score. The `-d` option below is the path to `params.publishDir`, and the `-o` option is the path of the integrated score file.
 
